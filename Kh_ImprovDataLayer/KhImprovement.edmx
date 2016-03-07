@@ -1,0 +1,219 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="KhImprovement.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="KhImprovementStoreContainer">
+    <EntitySet Name="FormEntries" EntityType="KhImprovement.Store.FormEntries" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Employees" EntityType="KhImprovement.Store.Employees" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Departments" EntityType="KhImprovement.Store.Departments" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="DepartmentEmployee" Association="KhImprovement.Store.DepartmentEmployee">
+      <End Role="Department" EntitySet="Departments" />
+      <End Role="Employee" EntitySet="Employees" />
+    </AssociationSet>
+    <AssociationSet Name="FormEntryDepartment" Association="KhImprovement.Store.FormEntryDepartment">
+      <End Role="FormEntry" EntitySet="FormEntries" />
+      <End Role="Department" EntitySet="Departments" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="FormEntries">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FormID" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="SubjectLine" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="CustomerName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="JobNumber" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="DepartmentID" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ProblemMsg" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="SuggestionMsg" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="DateEntered" Type="datetime" Nullable="false" />
+    <Property Name="IsAllEffected" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Employees">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FirstName" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="LastName" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Email" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Department_ID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Departments">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="DeptName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="DeptHead" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="FormEntry_ID" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="DepartmentEmployee">
+    <End Role="Department" Type="KhImprovement.Store.Departments" Multiplicity="1" />
+    <End Role="Employee" Type="KhImprovement.Store.Employees" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Department">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Employee">
+        <PropertyRef Name="Department_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FormEntryDepartment">
+    <End Role="FormEntry" Type="KhImprovement.Store.FormEntries" Multiplicity="1" />
+    <End Role="Department" Type="KhImprovement.Store.Departments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FormEntry">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Department">
+        <PropertyRef Name="FormEntry_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="KhImprovement" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="KhImprovementContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="FormEntries" EntityType="KhImprovement.FormEntry" />
+          <EntitySet Name="Employees" EntityType="KhImprovement.Employee" />
+          <AssociationSet Name="DepartmentEmployee" Association="KhImprovement.DepartmentEmployee">
+            <End EntitySet="Departments" Role="Department" />
+            <End EntitySet="Employees" Role="Employee" />
+          </AssociationSet>
+          <EntitySet Name="Departments" EntityType="KhImprovement.Department" />
+          <AssociationSet Name="FormEntryDepartment" Association="KhImprovement.FormEntryDepartment">
+            <End EntitySet="FormEntries" Role="FormEntry" />
+            <End EntitySet="Departments" Role="Department" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" Nullable="true" MaxLength="Max" Unicode="true" />
+          <Property Name="LastName" Type="String" Nullable="true" MaxLength="Max" Unicode="true" />
+          <Property Name="Email" Type="String" Nullable="true" MaxLength="Max" Unicode="true" />
+          <NavigationProperty Name="Department" Relationship="KhImprovement.DepartmentEmployee" FromRole="Employee" ToRole="Department" />
+        </EntityType>
+        <EntityType Name="FormEntry">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FormID" Type="String" Nullable="false" />
+          <Property Name="SubjectLine" Type="String" Nullable="true" Unicode="true" MaxLength="Max" />
+          <Property Name="CustomerName" Type="String" Nullable="false" Unicode="true" MaxLength="Max" />
+          <Property Name="JobNumber" Type="String" Nullable="false" Unicode="true" MaxLength="Max" />
+          <Property Name="DepartmentID" Type="String" Nullable="false" Unicode="true" MaxLength="Max" />
+          <Property Name="ProblemMsg" Type="String" Nullable="false" Unicode="true" MaxLength="Max" />
+          <Property Name="SuggestionMsg" Type="String" Nullable="false" Unicode="true" MaxLength="Max" />
+          <Property Name="DateEntered" Type="DateTime" Nullable="false" />
+          <Property Name="IsAllEffected" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Departments" Relationship="KhImprovement.FormEntryDepartment" FromRole="FormEntry" ToRole="Department" />
+        </EntityType>
+        <EntityType Name="Department">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="DeptName" Type="String" Nullable="false" />
+          <Property Name="DeptHead" Type="String" Nullable="false" />
+          <NavigationProperty Name="Employees" Relationship="KhImprovement.DepartmentEmployee" FromRole="Department" ToRole="Employee" />
+          <NavigationProperty Name="FormEntry" Relationship="KhImprovement.FormEntryDepartment" FromRole="Department" ToRole="FormEntry" />
+          <Property Name="ID" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="DepartmentEmployee">
+          <End Type="KhImprovement.Department" Multiplicity="1" Role="Department" />
+          <End Type="KhImprovement.Employee" Multiplicity="*" Role="Employee" />
+        </Association>
+        <Association Name="FormEntryDepartment">
+          <End Type="KhImprovement.FormEntry" Multiplicity="1" Role="FormEntry" />
+          <End Type="KhImprovement.Department" Multiplicity="*" Role="Department" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="KhImprovementStoreContainer" CdmEntityContainer="KhImprovementContainer">
+    <EntitySetMapping Name="FormEntries">
+      <EntityTypeMapping TypeName="IsTypeOf(KhImprovement.FormEntry)">
+        <MappingFragment StoreEntitySet="FormEntries">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="FormID" ColumnName="FormID" />
+          <ScalarProperty Name="SubjectLine" ColumnName="SubjectLine" />
+          <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+          <ScalarProperty Name="JobNumber" ColumnName="JobNumber" />
+          <ScalarProperty Name="DepartmentID" ColumnName="DepartmentID" />
+          <ScalarProperty Name="ProblemMsg" ColumnName="ProblemMsg" />
+          <ScalarProperty Name="SuggestionMsg" ColumnName="SuggestionMsg" />
+          <ScalarProperty Name="DateEntered" ColumnName="DateEntered" />
+          <ScalarProperty Name="IsAllEffected" ColumnName="IsAllEffected" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Employees">
+      <EntityTypeMapping TypeName="IsTypeOf(KhImprovement.Employee)">
+        <MappingFragment StoreEntitySet="Employees">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Departments">
+      <EntityTypeMapping TypeName="IsTypeOf(KhImprovement.Department)">
+        <MappingFragment StoreEntitySet="Departments">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="DeptName" ColumnName="DeptName" />
+          <ScalarProperty Name="DeptHead" ColumnName="DeptHead" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="DepartmentEmployee" TypeName="KhImprovement.DepartmentEmployee" StoreEntitySet="Employees">
+      <EndProperty Name="Department">
+        <ScalarProperty Name="ID" ColumnName="Department_ID" />
+      </EndProperty>
+      <EndProperty Name="Employee">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="FormEntryDepartment" TypeName="KhImprovement.FormEntryDepartment" StoreEntitySet="Departments">
+      <EndProperty Name="FormEntry">
+        <ScalarProperty Name="ID" ColumnName="FormEntry_ID" />
+      </EndProperty>
+      <EndProperty Name="Department">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
