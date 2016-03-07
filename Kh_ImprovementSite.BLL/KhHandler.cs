@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using KH_ImprovementSite;
+using Kh_ImprovDataLayer;
 
 namespace Kh_ImprovementSite.BLL
 {
@@ -11,7 +9,7 @@ namespace Kh_ImprovementSite.BLL
     {
         public List<Department> GetDepartments()
         {
-            using (var kh = new KhEntities())
+            using (var kh = new KhImprovementContainer())
             {
                 return (from db in kh.Departments
                             select db).ToList();
@@ -20,7 +18,7 @@ namespace Kh_ImprovementSite.BLL
 
         public List<Employee> GetEmployees()
         {
-            using (var kh = new KhEntities())
+            using (var kh = new KhImprovementContainer())
             {
                 return (from db in kh.Employees
                         select db).ToList();
@@ -37,9 +35,9 @@ namespace Kh_ImprovementSite.BLL
                 Console.WriteLine("K&H Departments and Department Heads");
                 foreach (var item in depts)
                 {
-                    Console.Write("\t" + item.DepartmentId);
-                    Console.Write("\t" + item.DepartmentHead);
-                    Console.WriteLine("\t" + item.DepartmentName);
+                    Console.Write("\t" + item.ID);
+                    Console.Write("\t" + item.DeptHead);
+                    Console.WriteLine("\t" + item.DeptName);
                 }
             }
         }
