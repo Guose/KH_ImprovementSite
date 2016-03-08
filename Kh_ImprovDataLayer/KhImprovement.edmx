@@ -9,70 +9,133 @@
     <EntitySet Name="FormEntries" EntityType="KhImprovement.Store.FormEntries" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Employees" EntityType="KhImprovement.Store.Employees" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Departments" EntityType="KhImprovement.Store.Departments" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Customers" EntityType="KhImprovement.Store.Customers" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="EffectedDepts" EntityType="KhImprovement.Store.EffectedDepts" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="CustomerFormEntry" Association="KhImprovement.Store.CustomerFormEntry">
+      <End Role="Customer" EntitySet="Customers" />
+      <End Role="FormEntry" EntitySet="FormEntries" />
+    </AssociationSet>
+    <AssociationSet Name="EmployeeFormEntry" Association="KhImprovement.Store.EmployeeFormEntry">
+      <End Role="Employee" EntitySet="Employees" />
+      <End Role="FormEntry" EntitySet="FormEntries" />
+    </AssociationSet>
     <AssociationSet Name="DepartmentEmployee" Association="KhImprovement.Store.DepartmentEmployee">
       <End Role="Department" EntitySet="Departments" />
       <End Role="Employee" EntitySet="Employees" />
     </AssociationSet>
-    <AssociationSet Name="FormEntryDepartment" Association="KhImprovement.Store.FormEntryDepartment">
-      <End Role="FormEntry" EntitySet="FormEntries" />
+    <AssociationSet Name="DepartmentEffectedDept" Association="KhImprovement.Store.DepartmentEffectedDept">
       <End Role="Department" EntitySet="Departments" />
+      <End Role="EffectedDept" EntitySet="EffectedDepts" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="FormEntries">
     <Key>
-      <PropertyRef Name="ID" />
+      <PropertyRef Name="FormID" />
     </Key>
-    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="FormID" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="FormID" Type="int" Nullable="false" />
+    <Property Name="Department" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CustomerName" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="JobNumber" Type="nvarchar(max)" Nullable="true" />
     <Property Name="SubjectLine" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="CustomerName" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="JobNumber" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="DepartmentID" Type="nvarchar(max)" Nullable="false" />
     <Property Name="ProblemMsg" Type="nvarchar(max)" Nullable="false" />
     <Property Name="SuggestionMsg" Type="nvarchar(max)" Nullable="false" />
     <Property Name="DateEntered" Type="datetime" Nullable="false" />
-    <Property Name="IsAllEffected" Type="bit" Nullable="false" />
+    <Property Name="IsAllDept" Type="bit" Nullable="false" />
+    <Property Name="Customer_CustID" Type="int" Nullable="false" />
+    <Property Name="Employee_EmpID" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Employees">
     <Key>
-      <PropertyRef Name="ID" />
+      <PropertyRef Name="EmpID" />
     </Key>
-    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EmpID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="FirstName" Type="nvarchar(max)" Nullable="true" />
     <Property Name="LastName" Type="nvarchar(max)" Nullable="true" />
     <Property Name="Email" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="Department_ID" Type="int" Nullable="false" />
+    <Property Name="Department_DeptID" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Departments">
     <Key>
-      <PropertyRef Name="ID" />
+      <PropertyRef Name="DeptID" />
     </Key>
+    <Property Name="DeptID" Type="int" Nullable="false" />
     <Property Name="DeptName" Type="nvarchar(max)" Nullable="false" />
     <Property Name="DeptHead" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="ID" Type="int" Nullable="false" />
-    <Property Name="FormEntry_ID" Type="int" Nullable="false" />
   </EntityType>
+  <EntityType Name="Customers">
+    <Key>
+      <PropertyRef Name="CustID" />
+    </Key>
+    <Property Name="CustID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CustomerName" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="JobNumber" Type="nvarchar(max)" Nullable="true" />
+  </EntityType>
+  <EntityType Name="EffectedDepts">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="EffectDept1" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="EffectDept2" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="EffectDept3" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="EffectDept4" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="EffectDept5" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="EffectDept6" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="EffectDept7" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="EffectDept8" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="EffectDept9" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="EffectDept10" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="EffectDept11" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="EffectDept12" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="EffectDept13" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="EffectDept14" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Department_DeptID" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="CustomerFormEntry">
+    <End Role="Customer" Type="KhImprovement.Store.Customers" Multiplicity="1" />
+    <End Role="FormEntry" Type="KhImprovement.Store.FormEntries" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="CustID" />
+      </Principal>
+      <Dependent Role="FormEntry">
+        <PropertyRef Name="Customer_CustID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="EmployeeFormEntry">
+    <End Role="Employee" Type="KhImprovement.Store.Employees" Multiplicity="1" />
+    <End Role="FormEntry" Type="KhImprovement.Store.FormEntries" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="EmpID" />
+      </Principal>
+      <Dependent Role="FormEntry">
+        <PropertyRef Name="Employee_EmpID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="DepartmentEmployee">
     <End Role="Department" Type="KhImprovement.Store.Departments" Multiplicity="1" />
     <End Role="Employee" Type="KhImprovement.Store.Employees" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Department">
-        <PropertyRef Name="ID" />
+        <PropertyRef Name="DeptID" />
       </Principal>
       <Dependent Role="Employee">
-        <PropertyRef Name="Department_ID" />
+        <PropertyRef Name="Department_DeptID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FormEntryDepartment">
-    <End Role="FormEntry" Type="KhImprovement.Store.FormEntries" Multiplicity="1" />
-    <End Role="Department" Type="KhImprovement.Store.Departments" Multiplicity="*" />
+  <Association Name="DepartmentEffectedDept">
+    <End Role="Department" Type="KhImprovement.Store.Departments" Multiplicity="1" />
+    <End Role="EffectedDept" Type="KhImprovement.Store.EffectedDepts" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="FormEntry">
-        <PropertyRef Name="ID" />
+      <Principal Role="Department">
+        <PropertyRef Name="DeptID" />
       </Principal>
-      <Dependent Role="Department">
-        <PropertyRef Name="FormEntry_ID" />
+      <Dependent Role="EffectedDept">
+        <PropertyRef Name="Department_DeptID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -83,59 +146,108 @@
         <EntityContainer Name="KhImprovementContainer" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="FormEntries" EntityType="KhImprovement.FormEntry" />
           <EntitySet Name="Employees" EntityType="KhImprovement.Employee" />
-          <AssociationSet Name="DepartmentEmployee" Association="KhImprovement.DepartmentEmployee">
-            <End EntitySet="Departments" Role="Department" />
-            <End EntitySet="Employees" Role="Employee" />
-          </AssociationSet>
           <EntitySet Name="Departments" EntityType="KhImprovement.Department" />
-          <AssociationSet Name="FormEntryDepartment" Association="KhImprovement.FormEntryDepartment">
-            <End EntitySet="FormEntries" Role="FormEntry" />
-            <End EntitySet="Departments" Role="Department" />
+          <EntitySet Name="Customers" EntityType="KhImprovement.Customer" />
+          <AssociationSet Name="CustomerFormEntry" Association="KhImprovement.CustomerFormEntry">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="FormEntry" EntitySet="FormEntries" />
+          </AssociationSet>
+          <AssociationSet Name="EmployeeFormEntry" Association="KhImprovement.EmployeeFormEntry">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="FormEntry" EntitySet="FormEntries" />
+          </AssociationSet>
+          <EntitySet Name="EffectedDepts" EntityType="KhImprovement.EffectedDept" />
+          <AssociationSet Name="DepartmentEmployee" Association="KhImprovement.DepartmentEmployee">
+            <End Role="Department" EntitySet="Departments" />
+            <End Role="Employee" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="DepartmentEffectedDept" Association="KhImprovement.DepartmentEffectedDept">
+            <End Role="Department" EntitySet="Departments" />
+            <End Role="EffectedDept" EntitySet="EffectedDepts" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Employee">
           <Key>
-            <PropertyRef Name="ID" />
+            <PropertyRef Name="EmpID" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmpID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="FirstName" Type="String" Nullable="true" MaxLength="Max" Unicode="true" />
           <Property Name="LastName" Type="String" Nullable="true" MaxLength="Max" Unicode="true" />
           <Property Name="Email" Type="String" Nullable="true" MaxLength="Max" Unicode="true" />
+          <NavigationProperty Name="FormEntries" Relationship="KhImprovement.EmployeeFormEntry" FromRole="Employee" ToRole="FormEntry" />
           <NavigationProperty Name="Department" Relationship="KhImprovement.DepartmentEmployee" FromRole="Employee" ToRole="Department" />
         </EntityType>
         <EntityType Name="FormEntry">
           <Key>
-            <PropertyRef Name="ID" />
+            <PropertyRef Name="FormID" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="FormID" Type="String" Nullable="false" />
+          <Property Name="FormID" Type="Int32" Nullable="false" />
+          <Property Name="Department" Type="String" Nullable="false" Unicode="true" MaxLength="Max" />
+          <Property Name="CustomerName" Type="String" Nullable="true" Unicode="true" MaxLength="Max" />
+          <Property Name="JobNumber" Type="String" Nullable="true" Unicode="true" MaxLength="Max" />
           <Property Name="SubjectLine" Type="String" Nullable="true" Unicode="true" MaxLength="Max" />
-          <Property Name="CustomerName" Type="String" Nullable="false" Unicode="true" MaxLength="Max" />
-          <Property Name="JobNumber" Type="String" Nullable="false" Unicode="true" MaxLength="Max" />
-          <Property Name="DepartmentID" Type="String" Nullable="false" Unicode="true" MaxLength="Max" />
           <Property Name="ProblemMsg" Type="String" Nullable="false" Unicode="true" MaxLength="Max" />
           <Property Name="SuggestionMsg" Type="String" Nullable="false" Unicode="true" MaxLength="Max" />
           <Property Name="DateEntered" Type="DateTime" Nullable="false" />
-          <Property Name="IsAllEffected" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Departments" Relationship="KhImprovement.FormEntryDepartment" FromRole="FormEntry" ToRole="Department" />
+          <Property Name="IsAllDept" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Customer" Relationship="KhImprovement.CustomerFormEntry" FromRole="FormEntry" ToRole="Customer" />
+          <NavigationProperty Name="Employee" Relationship="KhImprovement.EmployeeFormEntry" FromRole="FormEntry" ToRole="Employee" />
         </EntityType>
         <EntityType Name="Department">
           <Key>
-            <PropertyRef Name="ID" />
+            <PropertyRef Name="DeptID" />
           </Key>
+          <Property Name="DeptID" Type="Int32" Nullable="false" />
           <Property Name="DeptName" Type="String" Nullable="false" />
           <Property Name="DeptHead" Type="String" Nullable="false" />
           <NavigationProperty Name="Employees" Relationship="KhImprovement.DepartmentEmployee" FromRole="Department" ToRole="Employee" />
-          <NavigationProperty Name="FormEntry" Relationship="KhImprovement.FormEntryDepartment" FromRole="Department" ToRole="FormEntry" />
-          <Property Name="ID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="EffectedDepts" Relationship="KhImprovement.DepartmentEffectedDept" FromRole="Department" ToRole="EffectedDept" />
         </EntityType>
-        <Association Name="DepartmentEmployee">
-          <End Type="KhImprovement.Department" Multiplicity="1" Role="Department" />
-          <End Type="KhImprovement.Employee" Multiplicity="*" Role="Employee" />
+        <EntityType Name="Customer" Abstract="false">
+          <Key>
+            <PropertyRef Name="CustID" />
+          </Key>
+          <Property Name="CustID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerName" Type="String" Nullable="true" MaxLength="Max" Unicode="true" />
+          <Property Name="JobNumber" Type="String" Nullable="true" Unicode="true" MaxLength="Max" />
+          <NavigationProperty Name="FormEntries" Relationship="KhImprovement.CustomerFormEntry" FromRole="Customer" ToRole="FormEntry" />
+        </EntityType>
+        <EntityType Name="EffectedDept">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="EffectDept1" Type="String" Nullable="true" annotation:StoreGeneratedPattern="None" Unicode="true" MaxLength="Max" />
+          <Property Name="EffectDept2" Type="String" Nullable="true" MaxLength="Max" Unicode="true" />
+          <Property Name="EffectDept3" Type="String" Nullable="true" MaxLength="Max" Unicode="true" />
+          <Property Name="EffectDept4" Type="String" Nullable="true" MaxLength="Max" Unicode="true" />
+          <Property Name="EffectDept5" Type="String" Nullable="true" MaxLength="Max" Unicode="true" />
+          <Property Name="EffectDept6" Type="String" Nullable="true" MaxLength="Max" Unicode="true" />
+          <Property Name="EffectDept7" Type="String" Nullable="true" MaxLength="Max" Unicode="true" />
+          <Property Name="EffectDept8" Type="String" Nullable="true" MaxLength="Max" Unicode="true" />
+          <Property Name="EffectDept9" Type="String" Nullable="true" MaxLength="Max" Unicode="true" />
+          <Property Name="EffectDept10" Type="String" Nullable="true" MaxLength="Max" Unicode="true" />
+          <Property Name="EffectDept11" Type="String" Nullable="true" MaxLength="Max" Unicode="true" />
+          <Property Name="EffectDept12" Type="String" Nullable="true" MaxLength="Max" Unicode="true" />
+          <Property Name="EffectDept13" Type="String" Nullable="true" MaxLength="Max" Unicode="true" />
+          <Property Name="EffectDept14" Type="String" Nullable="true" MaxLength="Max" Unicode="true" />
+          <NavigationProperty Name="Department" Relationship="KhImprovement.DepartmentEffectedDept" FromRole="EffectedDept" ToRole="Department" />
+        </EntityType>
+        <Association Name="CustomerFormEntry">
+          <End Type="KhImprovement.Customer" Role="Customer" Multiplicity="1" />
+          <End Type="KhImprovement.FormEntry" Role="FormEntry" Multiplicity="*" />
         </Association>
-        <Association Name="FormEntryDepartment">
-          <End Type="KhImprovement.FormEntry" Multiplicity="1" Role="FormEntry" />
-          <End Type="KhImprovement.Department" Multiplicity="*" Role="Department" />
+        <Association Name="EmployeeFormEntry">
+          <End Type="KhImprovement.Employee" Role="Employee" Multiplicity="1" />
+          <End Type="KhImprovement.FormEntry" Role="FormEntry" Multiplicity="*" />
+        </Association>
+        <Association Name="DepartmentEmployee">
+          <End Type="KhImprovement.Department" Role="Department" Multiplicity="1" />
+          <End Type="KhImprovement.Employee" Role="Employee" Multiplicity="*" />
+        </Association>
+        <Association Name="DepartmentEffectedDept">
+          <End Type="KhImprovement.Department" Role="Department" Multiplicity="1" />
+          <End Type="KhImprovement.EffectedDept" Role="EffectedDept" Multiplicity="*" />
         </Association>
       </Schema>
     </edmx:ConceptualModels>
@@ -146,23 +258,22 @@
     <EntitySetMapping Name="FormEntries">
       <EntityTypeMapping TypeName="IsTypeOf(KhImprovement.FormEntry)">
         <MappingFragment StoreEntitySet="FormEntries">
-          <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="FormID" ColumnName="FormID" />
-          <ScalarProperty Name="SubjectLine" ColumnName="SubjectLine" />
+          <ScalarProperty Name="Department" ColumnName="Department" />
           <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
           <ScalarProperty Name="JobNumber" ColumnName="JobNumber" />
-          <ScalarProperty Name="DepartmentID" ColumnName="DepartmentID" />
+          <ScalarProperty Name="SubjectLine" ColumnName="SubjectLine" />
           <ScalarProperty Name="ProblemMsg" ColumnName="ProblemMsg" />
           <ScalarProperty Name="SuggestionMsg" ColumnName="SuggestionMsg" />
           <ScalarProperty Name="DateEntered" ColumnName="DateEntered" />
-          <ScalarProperty Name="IsAllEffected" ColumnName="IsAllEffected" />
+          <ScalarProperty Name="IsAllDept" ColumnName="IsAllDept" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Employees">
       <EntityTypeMapping TypeName="IsTypeOf(KhImprovement.Employee)">
         <MappingFragment StoreEntitySet="Employees">
-          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="EmpID" ColumnName="EmpID" />
           <ScalarProperty Name="FirstName" ColumnName="FirstName" />
           <ScalarProperty Name="LastName" ColumnName="LastName" />
           <ScalarProperty Name="Email" ColumnName="Email" />
@@ -172,25 +283,71 @@
     <EntitySetMapping Name="Departments">
       <EntityTypeMapping TypeName="IsTypeOf(KhImprovement.Department)">
         <MappingFragment StoreEntitySet="Departments">
-          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="DeptID" ColumnName="DeptID" />
           <ScalarProperty Name="DeptName" ColumnName="DeptName" />
           <ScalarProperty Name="DeptHead" ColumnName="DeptHead" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <AssociationSetMapping Name="DepartmentEmployee" TypeName="KhImprovement.DepartmentEmployee" StoreEntitySet="Employees">
-      <EndProperty Name="Department">
-        <ScalarProperty Name="ID" ColumnName="Department_ID" />
+    <EntitySetMapping Name="Customers">
+      <EntityTypeMapping TypeName="IsTypeOf(KhImprovement.Customer)">
+        <MappingFragment StoreEntitySet="Customers">
+          <ScalarProperty Name="CustID" ColumnName="CustID" />
+          <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+          <ScalarProperty Name="JobNumber" ColumnName="JobNumber" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EffectedDepts">
+      <EntityTypeMapping TypeName="IsTypeOf(KhImprovement.EffectedDept)">
+        <MappingFragment StoreEntitySet="EffectedDepts">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="EffectDept1" ColumnName="EffectDept1" />
+          <ScalarProperty Name="EffectDept2" ColumnName="EffectDept2" />
+          <ScalarProperty Name="EffectDept3" ColumnName="EffectDept3" />
+          <ScalarProperty Name="EffectDept4" ColumnName="EffectDept4" />
+          <ScalarProperty Name="EffectDept5" ColumnName="EffectDept5" />
+          <ScalarProperty Name="EffectDept6" ColumnName="EffectDept6" />
+          <ScalarProperty Name="EffectDept7" ColumnName="EffectDept7" />
+          <ScalarProperty Name="EffectDept8" ColumnName="EffectDept8" />
+          <ScalarProperty Name="EffectDept9" ColumnName="EffectDept9" />
+          <ScalarProperty Name="EffectDept10" ColumnName="EffectDept10" />
+          <ScalarProperty Name="EffectDept11" ColumnName="EffectDept11" />
+          <ScalarProperty Name="EffectDept12" ColumnName="EffectDept12" />
+          <ScalarProperty Name="EffectDept13" ColumnName="EffectDept13" />
+          <ScalarProperty Name="EffectDept14" ColumnName="EffectDept14" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="CustomerFormEntry" TypeName="KhImprovement.CustomerFormEntry" StoreEntitySet="FormEntries">
+      <EndProperty Name="Customer">
+        <ScalarProperty Name="CustID" ColumnName="Customer_CustID" />
       </EndProperty>
-      <EndProperty Name="Employee">
-        <ScalarProperty Name="ID" ColumnName="ID" />
+      <EndProperty Name="FormEntry">
+        <ScalarProperty Name="FormID" ColumnName="FormID" />
       </EndProperty>
     </AssociationSetMapping>
-    <AssociationSetMapping Name="FormEntryDepartment" TypeName="KhImprovement.FormEntryDepartment" StoreEntitySet="Departments">
-      <EndProperty Name="FormEntry">
-        <ScalarProperty Name="ID" ColumnName="FormEntry_ID" />
+    <AssociationSetMapping Name="EmployeeFormEntry" TypeName="KhImprovement.EmployeeFormEntry" StoreEntitySet="FormEntries">
+      <EndProperty Name="Employee">
+        <ScalarProperty Name="EmpID" ColumnName="Employee_EmpID" />
       </EndProperty>
+      <EndProperty Name="FormEntry">
+        <ScalarProperty Name="FormID" ColumnName="FormID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="DepartmentEmployee" TypeName="KhImprovement.DepartmentEmployee" StoreEntitySet="Employees">
       <EndProperty Name="Department">
+        <ScalarProperty Name="DeptID" ColumnName="Department_DeptID" />
+      </EndProperty>
+      <EndProperty Name="Employee">
+        <ScalarProperty Name="EmpID" ColumnName="EmpID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="DepartmentEffectedDept" TypeName="KhImprovement.DepartmentEffectedDept" StoreEntitySet="EffectedDepts">
+      <EndProperty Name="Department">
+        <ScalarProperty Name="DeptID" ColumnName="Department_DeptID" />
+      </EndProperty>
+      <EndProperty Name="EffectedDept">
         <ScalarProperty Name="ID" ColumnName="ID" />
       </EndProperty>
     </AssociationSetMapping>
@@ -208,7 +365,7 @@
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
         <DesignerProperty Name="EnablePluralization" Value="True" />
-        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Default" />
         <DesignerProperty Name="UseLegacyProvider" Value="False" />
       </DesignerInfoPropertySet>
     </edmx:Options>

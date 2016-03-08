@@ -12,7 +12,7 @@ namespace Kh_TestApp
         static void Main(string[] args)
         {
             KhHandler kh = new KhHandler();
-            kh.DisplayDepartments();
+
 
             Console.ReadKey();
         }

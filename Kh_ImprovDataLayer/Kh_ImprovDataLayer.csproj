@@ -44,6 +44,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Data.Entity.Design" />
     <Reference Include="System.Data.Linq" />
     <Reference Include="System.Data.SqlXml" />
@@ -60,25 +61,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Department.cs">
-      <DependentUpon>KhImprovement.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Employee.cs">
-      <DependentUpon>KhImprovement.tt</DependentUpon>
-    </Compile>
-    <Compile Include="FormEntry.cs">
-      <DependentUpon>KhImprovement.tt</DependentUpon>
-    </Compile>
-    <Compile Include="KhImprovement.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>KhImprovement.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="KhImprovement.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>KhImprovement.tt</DependentUpon>
-    </Compile>
     <Compile Include="KhImprovement.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -100,20 +82,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="KhImprovement.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>KhImprovement.Context.cs</LastGenOutput>
-      <DependentUpon>KhImprovement.edmx</DependentUpon>
-    </Content>
-    <Content Include="KhImprovement.edmx.sql" />
-    <Content Include="KhImprovement.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>KhImprovement.cs</LastGenOutput>
-      <DependentUpon>KhImprovement.edmx</DependentUpon>
-    </Content>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+    <Content Include="KhImprovement.edmx.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

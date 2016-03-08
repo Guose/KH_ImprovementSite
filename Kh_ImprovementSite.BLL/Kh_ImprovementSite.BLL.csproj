@@ -56,12 +56,6 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Kh_ImprovDataLayer\Kh_ImprovDataLayer.csproj">
-      <Project>{0ef2b58b-9447-41e9-b56e-1a216f424d81}</Project>
-      <Name>Kh_ImprovDataLayer</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
