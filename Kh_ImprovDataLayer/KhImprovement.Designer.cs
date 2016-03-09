@@ -940,10 +940,12 @@ namespace Kh_ImprovDataLayer
         /// Create a new Employee object.
         /// </summary>
         /// <param name="empID">Initial value of the EmpID property.</param>
-        public static Employee CreateEmployee(global::System.Int32 empID)
+        /// <param name="deptName">Initial value of the DeptName property.</param>
+        public static Employee CreateEmployee(global::System.Int32 empID, global::System.String deptName)
         {
             Employee employee = new Employee();
             employee.EmpID = empID;
+            employee.DeptName = deptName;
             return employee;
         }
 
@@ -983,30 +985,6 @@ namespace Kh_ImprovDataLayer
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.String FirstName
-        {
-            get
-            {
-                return _FirstName;
-            }
-            set
-            {
-                OnFirstNameChanging(value);
-                ReportPropertyChanging("FirstName");
-                _FirstName = StructuralObject.SetValidValue(value, true, "FirstName");
-                ReportPropertyChanged("FirstName");
-                OnFirstNameChanged();
-            }
-        }
-        private global::System.String _FirstName;
-        partial void OnFirstNameChanging(global::System.String value);
-        partial void OnFirstNameChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
         public global::System.String LastName
         {
             get
@@ -1031,6 +1009,30 @@ namespace Kh_ImprovDataLayer
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
+        public global::System.String FirstName
+        {
+            get
+            {
+                return _FirstName;
+            }
+            set
+            {
+                OnFirstNameChanging(value);
+                ReportPropertyChanging("FirstName");
+                _FirstName = StructuralObject.SetValidValue(value, true, "FirstName");
+                ReportPropertyChanged("FirstName");
+                OnFirstNameChanged();
+            }
+        }
+        private global::System.String _FirstName;
+        partial void OnFirstNameChanging(global::System.String value);
+        partial void OnFirstNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
         public global::System.String Email
         {
             get
@@ -1049,6 +1051,30 @@ namespace Kh_ImprovDataLayer
         private global::System.String _Email;
         partial void OnEmailChanging(global::System.String value);
         partial void OnEmailChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String DeptName
+        {
+            get
+            {
+                return _DeptName;
+            }
+            set
+            {
+                OnDeptNameChanging(value);
+                ReportPropertyChanging("DeptName");
+                _DeptName = StructuralObject.SetValidValue(value, false, "DeptName");
+                ReportPropertyChanged("DeptName");
+                OnDeptNameChanged();
+            }
+        }
+        private global::System.String _DeptName;
+        partial void OnDeptNameChanging(global::System.String value);
+        partial void OnDeptNameChanged();
 
         #endregion
 

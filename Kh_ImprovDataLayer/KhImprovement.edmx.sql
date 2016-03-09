@@ -2,13 +2,13 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 03/07/2016 16:47:08
+-- Date Created: 03/09/2016 11:03:41
 -- Generated from EDMX file: C:\Users\jelder\Desktop\Visual Studio JJE\KH_ImprovSite\Kh_ImprovDataLayer\KhImprovement.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
 GO
-USE [FlightInformation];
+USE [KH_ImprovementSite];
 GO
 IF SCHEMA_ID(N'dbo') IS NULL EXECUTE(N'CREATE SCHEMA [dbo]');
 GO
@@ -56,7 +56,7 @@ GO
 
 -- Creating table 'FormEntries'
 CREATE TABLE [dbo].[FormEntries] (
-    [FormID] int  NOT NULL,
+    [FormID] int IDENTITY(1,1) NOT NULL,
     [Department] nvarchar(max)  NOT NULL,
     [CustomerName] nvarchar(max)  NULL,
     [JobNumber] nvarchar(max)  NULL,
@@ -73,16 +73,17 @@ GO
 -- Creating table 'Employees'
 CREATE TABLE [dbo].[Employees] (
     [EmpID] int IDENTITY(1,1) NOT NULL,
-    [FirstName] nvarchar(max)  NULL,
     [LastName] nvarchar(max)  NULL,
+    [FirstName] nvarchar(max)  NULL,
     [Email] nvarchar(max)  NULL,
+    [DeptName] nvarchar(max)  NOT NULL,
     [Department_DeptID] int  NOT NULL
 );
 GO
 
 -- Creating table 'Departments'
 CREATE TABLE [dbo].[Departments] (
-    [DeptID] int  NOT NULL,
+    [DeptID] int IDENTITY(1,1) NOT NULL,
     [DeptName] nvarchar(max)  NOT NULL,
     [DeptHead] nvarchar(max)  NOT NULL
 );
@@ -98,7 +99,7 @@ GO
 
 -- Creating table 'EffectedDepts'
 CREATE TABLE [dbo].[EffectedDepts] (
-    [ID] int  NOT NULL,
+    [ID] int IDENTITY(1,1) NOT NULL,
     [EffectDept1] nvarchar(max)  NULL,
     [EffectDept2] nvarchar(max)  NULL,
     [EffectDept3] nvarchar(max)  NULL,

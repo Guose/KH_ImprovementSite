@@ -32,7 +32,7 @@
     <Key>
       <PropertyRef Name="FormID" />
     </Key>
-    <Property Name="FormID" Type="int" Nullable="false" />
+    <Property Name="FormID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Department" Type="nvarchar(max)" Nullable="false" />
     <Property Name="CustomerName" Type="nvarchar(max)" Nullable="true" />
     <Property Name="JobNumber" Type="nvarchar(max)" Nullable="true" />
@@ -49,16 +49,17 @@
       <PropertyRef Name="EmpID" />
     </Key>
     <Property Name="EmpID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="FirstName" Type="nvarchar(max)" Nullable="true" />
     <Property Name="LastName" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="FirstName" Type="nvarchar(max)" Nullable="true" />
     <Property Name="Email" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="DeptName" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Department_DeptID" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Departments">
     <Key>
       <PropertyRef Name="DeptID" />
     </Key>
-    <Property Name="DeptID" Type="int" Nullable="false" />
+    <Property Name="DeptID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="DeptName" Type="nvarchar(max)" Nullable="false" />
     <Property Name="DeptHead" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
@@ -74,7 +75,7 @@
     <Key>
       <PropertyRef Name="ID" />
     </Key>
-    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="EffectDept1" Type="nvarchar(max)" Nullable="true" />
     <Property Name="EffectDept2" Type="nvarchar(max)" Nullable="true" />
     <Property Name="EffectDept3" Type="nvarchar(max)" Nullable="true" />
@@ -171,17 +172,18 @@
             <PropertyRef Name="EmpID" />
           </Key>
           <Property Name="EmpID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="FirstName" Type="String" Nullable="true" MaxLength="Max" Unicode="true" />
           <Property Name="LastName" Type="String" Nullable="true" MaxLength="Max" Unicode="true" />
+          <Property Name="FirstName" Type="String" Nullable="true" MaxLength="Max" Unicode="true" />
           <Property Name="Email" Type="String" Nullable="true" MaxLength="Max" Unicode="true" />
           <NavigationProperty Name="FormEntries" Relationship="KhImprovement.EmployeeFormEntry" FromRole="Employee" ToRole="FormEntry" />
           <NavigationProperty Name="Department" Relationship="KhImprovement.DepartmentEmployee" FromRole="Employee" ToRole="Department" />
+          <Property Name="DeptName" Type="String" Nullable="false" Unicode="true" MaxLength="Max" />
         </EntityType>
         <EntityType Name="FormEntry">
           <Key>
             <PropertyRef Name="FormID" />
           </Key>
-          <Property Name="FormID" Type="Int32" Nullable="false" />
+          <Property Name="FormID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Department" Type="String" Nullable="false" Unicode="true" MaxLength="Max" />
           <Property Name="CustomerName" Type="String" Nullable="true" Unicode="true" MaxLength="Max" />
           <Property Name="JobNumber" Type="String" Nullable="true" Unicode="true" MaxLength="Max" />
@@ -197,7 +199,7 @@
           <Key>
             <PropertyRef Name="DeptID" />
           </Key>
-          <Property Name="DeptID" Type="Int32" Nullable="false" />
+          <Property Name="DeptID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="DeptName" Type="String" Nullable="false" />
           <Property Name="DeptHead" Type="String" Nullable="false" />
           <NavigationProperty Name="Employees" Relationship="KhImprovement.DepartmentEmployee" FromRole="Department" ToRole="Employee" />
@@ -216,7 +218,7 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="EffectDept1" Type="String" Nullable="true" annotation:StoreGeneratedPattern="None" Unicode="true" MaxLength="Max" />
           <Property Name="EffectDept2" Type="String" Nullable="true" MaxLength="Max" Unicode="true" />
           <Property Name="EffectDept3" Type="String" Nullable="true" MaxLength="Max" Unicode="true" />
@@ -274,9 +276,10 @@
       <EntityTypeMapping TypeName="IsTypeOf(KhImprovement.Employee)">
         <MappingFragment StoreEntitySet="Employees">
           <ScalarProperty Name="EmpID" ColumnName="EmpID" />
-          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
           <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
           <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="DeptName" ColumnName="DeptName" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
