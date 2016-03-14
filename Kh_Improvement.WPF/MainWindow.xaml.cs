@@ -1,17 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Kh_Improvement.WPF
 {
@@ -32,7 +20,7 @@ namespace Kh_Improvement.WPF
 
         private void chkSelectAll_Click(object sender, RoutedEventArgs e)
         {
-            CheckBox[] boxes = new CheckBox[14];
+            CheckBox[] boxes = new CheckBox[16];
 
             boxes[0] = chkBindery;
             boxes[1] = chkDigital;
@@ -45,9 +33,11 @@ namespace Kh_Improvement.WPF
             boxes[8] = chkPM;
             boxes[9] = chkPrepress;
             boxes[10] = chkPressRoom;
-            boxes[11] = chkSales;
+            boxes[11] = chkBusDev;
             boxes[12] = chkScheduling;
             boxes[13] = chkShipping;
+            boxes[14] = chkFacility;
+            boxes[15] = chkOffice;
 
             if (chkSelectAll.IsChecked == true)
             {
@@ -63,6 +53,28 @@ namespace Kh_Improvement.WPF
                     boxes[i].IsChecked = false;
                 }
             }
+        }
+
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {            
+            cboDepartments.Items.Add("*<Select Your Department>");
+            cboDepartments.SelectedIndex = 0;
+
+            //KhHandler handle = new KhHandler();
+
+            //string[] depts = handle.GetDepartments();
+
+            //foreach (string item in depts)
+            //{
+            //    cboDepartments.Items.Add(item);
+            //}
+
+        }
+
+        private void btnSubmit_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
